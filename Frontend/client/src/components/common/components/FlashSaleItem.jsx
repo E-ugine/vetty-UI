@@ -24,14 +24,14 @@ const FlashSaleItem = ({ item }) => {
     }
   }, [item]);
 
-  const { handleAddToCart, isInCart } = AddToCart({ item }); // Use AddToCart component to get handleAddToCart and isInCart
+  const { handleAddToCart, isInCart } = AddToCart({ item }); 
 
   // Function to render stars
   const renderStars = () => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
       // Determine star color based on index and item.stars
-      const starColor = i < item.stars ? "#FFAD33" : "#D1D5DB"; // Orange if index < item.stars, gray otherwise
+      const starColor = i < item.stars ? "#FFAD33" : "#D1D5DB"; 
       stars.push(
         <svg
           key={i}
@@ -90,7 +90,7 @@ const FlashSaleItem = ({ item }) => {
       <div className="flex md:items-start items-center flex-col ">
         <h3 className="text-lg font-base mt-4">{item.title}</h3>
         <p className="text-red-500  text-sm font-semibold line-clamp-2">
-          ${item.price}
+          Ksh.{item.price}
           {item.discount && (
             <span className="ml-2 text-gray-500 text-sm font-semibold line-through">
               ${item.price + (item.price * item.discount) / 100}
