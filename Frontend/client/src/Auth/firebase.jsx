@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  const isAuthenticated = !!currentUser; // Boolean based on whether a user is logged in
+  const isAuthenticated = !!currentUser; 
 
   return (
     <AuthContext.Provider value={{ currentUser, isAuthenticated, setCurrentUser }}>
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom hook for using AuthContext
+
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -60,5 +60,5 @@ export const useAuth = () => {
   return context;
 };
 
-// Explicitly export AuthContext
+
 export { AuthContext, auth, firestore };

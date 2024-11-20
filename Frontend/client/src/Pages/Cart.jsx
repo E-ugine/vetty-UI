@@ -38,7 +38,7 @@ const Cart = () => {
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded shadow-md text-center">
             <p className="text-lg font-semibold">
-              {i18n.t("Please log in to access your cart.")}
+              {i18n.t("Please log in first to access your cart.")}
             </p>
           </div>
         </div>

@@ -9,7 +9,7 @@ const RedButton = ({ name, disabled = false }) => {
     ${
       disabled
         ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-        : "bg-green-600 text-white hover:bg-yellow-500 transition-transform duration-100 transform hover:translate-y-[-4px] "
+        : "bg-green-600 text-white  transition-transform duration-100 transform hover:translate-y-[-4px] "
     }
     `}
     >
