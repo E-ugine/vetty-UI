@@ -15,16 +15,15 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext, auth } from "../../Auth/firebase";
 
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";
 
 const Navigations = () => {
   const location = useLocation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const { currentUser } = useContext(AuthContext); 
+  const { currentUser } = useContext(AuthContext);
 
- 
   const routes = [
     { path: "/", label: i18n.t("home") },
     { path: "/allProducts", label: i18n.t("allProducts.redTitle") },
@@ -37,7 +36,6 @@ const Navigations = () => {
           { path: "/signup", label: i18n.t("signUp") },
         ]),
   ];
-
 
   const currentRouteIndex = routes.findIndex(
     (route) => route.path === location.pathname
@@ -52,6 +50,7 @@ const Navigations = () => {
     }
     setDrawerOpen(open);
   };
+
   const handleLogout = async () => {
     try {
       await auth.signOut();
@@ -73,23 +72,13 @@ const Navigations = () => {
             <svg
               className="w-6 sm:w-8"
               viewBox="0 0 24 24"
-              fill="none"
+              fill="white"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M4 5C3.44772 5 3 5.44772 3 6C3 6.55228 3.44772 7 4 7H20C20.5523 7 21 6.55228 21 6C21 5.44772 20.5523 5 20 5H4ZM7 12C7 11.4477 7.44772 11 8 11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H8C7.44772 13 7 12.5523 7 12ZM13 18C13 17.4477 13.4477 17 14 17H20C20.5523 17 21 17.4477 21 18C21 18.5523 20.5523 19 20 19H14C13.4477 19 13 18.5523 13 18Z"
-                  fill="#000000"
-                ></path>{" "}
-              </g>
+              <path
+                d="M4 5C3.44772 5 3 5.44772 3 6C3 6.55228 3.44772 7 4 7H20C20.5523 7 21 6.55228 21 6C21 5.44772 20.5523 5 20 5H4ZM7 12C7 11.4477 7.44772 11 8 11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H8C7.44772 13 7 12.5523 7 12ZM13 18C13 17.4477 13.4477 17 14 17H20C20.5523 17 21 17.4477 21 18C21 18.5523 20.5523 19 20 19H14C13.4477 19 13 18.5523 13 18Z"
+                fill="white"
+              />
             </svg>
           </IconButton>
           <Drawer
@@ -111,12 +100,14 @@ const Navigations = () => {
                     key={index}
                     component={Link}
                     to={route.path}
-                    onClick={toggleDrawer(false)} on
+                    onClick={toggleDrawer(false)}
                   >
-                    <ListItemText primary={route.label} />
+                    <ListItemText
+                      primary={route.label}
+                      sx={{ color: "white" }}
+                    />
                   </ListItem>
                 ))}
-                {/* If the user is logged in, show the logout button */}
                 {currentUser && (
                   <ListItem
                     button
@@ -124,12 +115,13 @@ const Navigations = () => {
                     to="/"
                     onClick={handleLogout}
                   >
-                    <ListItemText primary={i18n.t("logout")} />
+                    <ListItemText
+                      primary={i18n.t("logout")}
+                      sx={{ color: "white" }}
+                    />
                   </ListItem>
                 )}
               </List>
-
-    
             </motion.div>
           </Drawer>
         </>
@@ -139,16 +131,19 @@ const Navigations = () => {
           indicatorColor="primary"
           textColor="primary"
           value={currentRouteIndex !== -1 ? currentRouteIndex : false}
-          onClick={window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          })}
+          onClick={() =>
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            })
+          }
         >
           {routes.map((route, index) => (
             <Tab
               sx={{
                 textTransform: "none",
                 fontSize: "16px",
+                color: "white",
                 "&.Mui-selected": {
                   color: "black",
                 },
@@ -162,10 +157,9 @@ const Navigations = () => {
               to={route.path}
             />
           ))}
-          {/* If the user is logged in, show the logout button */}
           {currentUser && (
             <ListItem button component={Link} to="/" onClick={handleLogout}>
-              <ListItemText primary={i18n.t("logout")} />
+              <ListItemText primary={i18n.t("logout")} sx={{ color: "white" }} />
             </ListItem>
           )}
         </Tabs>

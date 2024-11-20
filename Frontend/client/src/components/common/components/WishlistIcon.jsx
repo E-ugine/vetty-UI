@@ -31,7 +31,7 @@ const WishlistIcon = ({ selectedProduct, style = "" }) => {
   return (
     <div className="">
       {isInWishlist ? (
-        <div className={`${style} bg-zinc-200 hover:bg-red-300  rounded-full `}>
+        <div className={`${style} bg-zinc-200  rounded-full `}>
           <IconButton onClick={handleDeleteFromWishlist} size="small">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full hover:bg-red-500 opacity-75"></span>
             <svg
