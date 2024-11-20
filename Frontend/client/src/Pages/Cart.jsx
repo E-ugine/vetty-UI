@@ -82,11 +82,11 @@ const Cart = () => {
               <p className="text-xl font-semibold">{i18n.t("cart.cartTotal")}</p>
               <div className="flex justify-between mt-4 border-b">
                 <p className="text-xl">{i18n.t("cart.total")}:</p>
-                <p className="text-xl">${subtotal}</p>
+                <p className="text-xl">Ksh.{subtotal}</p>
               </div>
               <div className="flex justify-between mt-4 border-b">
                 <p className="text-xl">{i18n.t("cart.subtotal")}:</p>
-                <p className="text-xl">${total}</p>
+                <p className="text-xl">Ksh.{total}</p>
               </div>
               <div className="flex justify-between mt-4 border-b">
                 <p className="text-xl">{i18n.t("cart.shipping")}:</p>

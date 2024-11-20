@@ -3,9 +3,8 @@ import i18n from "../common/components/LangConfig";
 import { Link } from "react-router-dom";
 
 const videos = [
-  "https://tecdn.b-cdn.net/img/video/Tropical.mp4",
-  "https://tecdn.b-cdn.net/img/video/forest.mp4",
-  "https://tecdn.b-cdn.net/img/video/Agua-natural.mp4"
+  "https://videos.pexels.com/video-files/4267751/4267751-uhd_2560_1440_30fps.mp4",
+  "https://videos.pexels.com/video-files/8730830/8730830-uhd_2560_1440_25fps.mp4"
 ];
 
 const Row1 = () => {

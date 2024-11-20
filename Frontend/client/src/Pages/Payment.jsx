@@ -1,88 +1,89 @@
-import { useState } from "react";
-import RedButton from "../components/common/components/RedButton";
-import i18n from "../components/common/components/LangConfig";
-import { Link } from "@mui/material";
+import { useState } from 'react';
 
 const Payment = () => {
-  const [paymentInfo, setPaymentInfo] = useState({
-    cardNumber: "",
-    expDate: "",
-    cvv: "",
-  });
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [amount, setAmount] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState('');
 
-  
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setMessage('');
+        
+        try {
+            const response = await fetch('/api/pay', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    phone_number: phoneNumber,
+                    amount: amount,
+                }),
+            });
 
-  return (
-    <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md mt-48">
-      {/* Payment form */}
-      <h1 className="text-2xl font-semibold mb-4">
-        {i18n.t("payment.payment")}
-      </h1>
-      <form>
-        <div className="mb-4">
-          <label
-            htmlFor="cardNumber"
-            className="block text-sm font-medium text-gray-700"
-          >
-            {i18n.t("payment.number")}
-          </label>
-          <input
-            type="text"
-            id="cardNumber"
-            className="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm"
-            value={paymentInfo.cardNumber}
-            onChange={(e) =>
-              setPaymentInfo({ ...paymentInfo, cardNumber: e.target.value })
+            const data = await response.json();
+            if (response.ok) {
+                setMessage(data.message || 'Payment processed successfully!');
+            } else {
+                setMessage(data.error || 'Payment failed.');
             }
-            placeholder={i18n.t("payment.enter")}
-          />
+        } catch (error) {
+            console.error(error);
+            setMessage('An error occurred. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div style={{ maxWidth: '400px', margin: '0 auto', padding: '1rem', border: '1px solid #ccc', borderRadius: '8px' }}>
+            <h2>Make a Payment</h2>
+            <form onSubmit={handleSubmit}>
+                <div style={{ marginBottom: '1rem' }}>
+                    <label htmlFor="phoneNumber" style={{ display: 'block', marginBottom: '0.5rem' }}>Phone Number:</label>
+                    <input
+                        type="text"
+                        id="phoneNumber"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        placeholder="Enter phone number"
+                        required
+                        style={{ width: '100%', padding: '0.5rem', border: '1px solid #ccc', borderRadius: '4px' }}
+                    />
+                </div>
+                <div style={{ marginBottom: '1rem' }}>
+                    <label htmlFor="amount" style={{ display: 'block', marginBottom: '0.5rem' }}>Amount:</label>
+                    <input
+                        type="number"
+                        id="amount"
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
+                        placeholder="Enter amount"
+                        required
+                        style={{ width: '100%', padding: '0.5rem', border: '1px solid #ccc', borderRadius: '4px' }}
+                    />
+                </div>
+                <button
+                    type="submit"
+                    disabled={loading}
+                    style={{
+                        backgroundColor: loading ? '#ddd' : '#007bff',
+                        color: '#fff',
+                        padding: '0.5rem 1rem',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: loading ? 'not-allowed' : 'pointer',
+                    }}
+                >
+                    {loading ? 'Processing...' : 'Pay Now'}
+                </button>
+            </form>
+            {message && <p style={{ marginTop: '1rem', color: message.includes('success') ? 'green' : 'red' }}>{message}</p>}
         </div>
-        <div className="mb-4">
-          <label
-            htmlFor="expDate"
-            className="block text-sm font-medium text-gray-700"
-          >
-            {i18n.t("payment.expirationDate")}
-          </label>
-          <input
-            type="text"
-            id="expDate"
-            className="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm"
-            value={paymentInfo.expDate}
-            onChange={(e) =>
-              setPaymentInfo({ ...paymentInfo, expDate: e.target.value })
-            }
-            placeholder="MM/YY"
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="cvv"
-            className="block text-sm font-medium text-gray-700"
-          >
-            CVV
-          </label>
-          <input
-            type="text"
-            id="cvv"
-            className="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm"
-            value={paymentInfo.cvv}
-            onChange={(e) =>
-              setPaymentInfo({ ...paymentInfo, cvv: e.target.value })
-            }
-            placeholder="CVV"
-          />
-        </div>
-        {/* Place Order button */}
-        <Link href="/">
-          <RedButton
-            name={i18n.t("redButtons.placeOrder")}
-            // onClick={handlePayment}
-          />
-        </Link>
-      </form>
-    </div>
-  );
+    );
 };
 
 export default Payment;
+
