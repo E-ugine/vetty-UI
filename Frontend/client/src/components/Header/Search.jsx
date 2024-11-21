@@ -35,7 +35,7 @@ const Search = styled("div")(({ theme }) => ({
   },
   "& .MuiIconButton-root": {
     "&:hover": {
-      backgroundColor: "rgba(219, 68, 68, .9)",
+      
       color: "white",
     },
   },

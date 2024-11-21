@@ -136,7 +136,7 @@ const Product = () => {
                   </div>
                   <div className="flex gap-10">
                     <p className="text-gray-800 text-xl md:text-2xl font-inter">
-                      ${selectedProduct.price}.00
+                      Ksh.{selectedProduct.price}.00
                     </p>
                     <RatingComp
                       text={i18n.t("productPage.review")}
