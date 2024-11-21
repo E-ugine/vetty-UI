@@ -42,7 +42,7 @@ const Row1 = () => {
       <div className="flex flex-col items-center  justify-center xl:my-10 xl:ml-10 xl:gap-6 text-black w-full h-full">
         {/* Section Title */}
         <h1 className="text-3xl mb-4">Welcome To Vetty Store!</h1>
-        <p>We strive to enhance the lives and bonds between pets and their people. Our goal is to be your trusted local, neighborhood pet store, because after all, we speak pet!
+        <p>We strive to enhance the lives and bonds between pets and their people. Our goal is to be your trusted local and neighborhood pet store, because after all, we speak pet!
 
 </p>
         {/* Video Player */}
